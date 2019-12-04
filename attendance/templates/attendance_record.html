@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+    <body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        {% include 'include/_SideBar.html' %}
+        <div id="content-wrapper">
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Time Sheet
+                </div>
+                <a href="{{ url_for('user.pdf_file') }}" class="btn btn-outline-success mr-1"
+                   style="font-size: x-large">PDF</a>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            {% if current_user.role == 'admin' %}
+                                <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>User Name</th>
+                                    <th>Check in</th>
+                                    <th>Check Out</th>
+                                    <th>Total Time</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for record in attendance_record %}
+                                    <tr>
+                                        <td>{{ record.time.full_name }}</td>
+                                        <td>{{ record.time.user_name }}</td>
+                                        <td>{{ record.check_in.strftime("%I:%M %p") }}</td>
+                                        {% if record.check_out == None %}
+                                            <td><span style="color:red;">Missing</span></td>
+                                        {% else %}
+                                            <td>{{ record.check_out.strftime("%I:%M %p") }}</td>
+                                        {% endif %}
+                                        {% if record.check_out == None %}
+                                            <td><span style="color: green">0:00:00</span></td>
+                                        {% else %}
+                                            <td>{{ record.check_out - record.check_in }}</td>
+                                        {% endif %}
+                                        <td>{{ record.date }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            {% else %}
+                                <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>User Name</th>
+                                    <th>Check in</th>
+                                    <th>Check Out</th>
+                                    <th>Total Time</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for c_user in current_user_record %}
+                                    <tr>
+                                        <td>{{ c_user.time.full_name }}</td>
+                                        <td>{{ c_user.time.user_name }}</td>
+                                        <td>{{ c_user.check_in.strftime("%I:%M %p") }}</td>
+                                        {% if c_user.check_out == None %}
+                                            <td><span style="color: red">Missing</span></td>
+                                        {% else %}
+                                            <td>{{ c_user.check_out.strftime("%I:%M %p") }}</td>
+                                        {% endif %}
+                                        {% if  c_user.check_out == None %}
+                                            <td><span style="color: green">0:00:00</span></td>
+                                        {% else %}
+                                            <td>{{ c_user.check_out - c_user.check_in }}</td>
+                                        {% endif %}
+                                        <td>{{ c_user.date }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    </body>
+{% endblock %}

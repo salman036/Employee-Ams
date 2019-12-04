@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <a class="navbar-brand mr-1" href="{{ url_for('main.main_menu') }}">Employee AMS</a>
+    {% if current_user.role == 'admin' %}
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="btn btn-success btn-rounded" style="color: white">{{ current_user.company.company_name }}</a>
+    {% endif %}
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+        </div>
+    </form>
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-md-0">
+        {% if current_user.is_authenticated == False %}
+            <a href="{{ url_for('company.login') }}" class="btn btn-warning btn-rounded mr-2">Login</a>
+            <a href="{{ url_for('company.register') }}" class="btn btn-warning btn-rounded">Register</a>
+        {% else %}
+            <a href="{{ url_for('user.profile') }}"
+               class="btn btn-outline-warning btn-rounded mr-2">{{ current_user.user_name }}</a>
+            <a href="#" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#logoutModal">Logout</a>
+        {% endif %}
+    </ul>
+</nav>
+{% include '_modalInclude/logoutModal.html' %}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+<body id="page-top">
+<div id="wrapper">
+    <!-- Sidebar -->
+    {% include 'include/_SideBar.html' %}
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            {% if current_user.role == 'admin' %}
+            <div class="row">
+                <div class="col-xl-4 col-sm-6 mb-5">
+                    <a href="{{ url_for('user.add_user')}}">
+                        <div class="card text-white bg-primary o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="mr-5">Add User</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-sm-6 mb-5">
+                    <a href="{{ url_for('department.add_department')}}">
+                        <div class="card text-white bg-warning o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="mr-5">Add Department</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-sm-6 mb-5">
+                    <a href="{{ url_for('detail_department.department_details')}}">
+                        <div class="card text-white bg-dark o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="mr-5">View Department Detail</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    User Attendance
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            {% if current_user.role == 'admin' %}
+                            <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ user.user_name }}</td>
+                                <td><a name="check_in" class="btn btn-outline-success waves-effect" href="{{ url_for('user_attendance.check_in', user_id=user.id)}}">Check
+                                    In</a></td>
+                                <td><a name="check_out" class="btn btn-outline-success waves-effect"
+                                       href="{{ url_for('user_attendance.check_out', user_id=user.id)}}"
+                                >Check Out</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                            {% else %}
+                            <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ current_user.user_name }}</td>
+                                <td><a name="check_in" class="btn btn-outline-success waves-effect"
+                                       href="{{ url_for('user_attendance.check_in', user_id=current_user.id)}}">Check
+                                    In</a></td>
+                                <td><a name="check_out" class="btn btn-outline-success waves-effect"
+                                       href="{{ url_for('user_attendance.check_out', user_id=current_user.id)}}"
+                                >Check Out</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+{% endblock %}

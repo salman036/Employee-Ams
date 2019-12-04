@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="wrap-input100">
+            <hr>
+            <div class="row" style="background-color: #13191E">
+                <!-- left column -->
+                <div class="col-md-3">
+                    <br>
+                    <div class="text-center">
+                        <img src="{{ image_upload }}" class="rounded circle">
+                    </div>
+                </div>
+                <!-- edit form column -->
+                <div class="col-md-9 personal-info">
+                    <br>
+                    <h3 style="color: white">Personal info</h3>
+
+                    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label" style="color: white">Full name:</label>
+                                <div class="col-lg-8">
+                                    {{ form.full_name(class="form-control", readonly=true) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label" style="color: white">User name:</label>
+                                <div class="col-lg-8">
+                                    {{ form.user_name(class="form-control", readonly=true) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label" style="color: white">Email:</label>
+                                <div class="col-lg-8">
+                                    {{ form.email(class="form-control", readonly=true) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-8">
+                                    <label class="col-lg-3 control-label" style="color: white">Department:</label>
+                                    {% if current_user.department == None %}
+                                        <input class="form-control" type="text"
+                                               value="None" readonly>
+                                    {% else %}
+                                        {{ form.department(class="form-control", readonly=true) }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-8">
+                                    {{ form.upload_image.label(class="form-control-label", style="color: white") }}
+                                    {{ form.upload_image(class="form-control-file", style="color: white") }}
+                                    {% if form.upload_image.errors %}
+                                        {% for error in form.upload_image.errors %}
+                                            <span class="text-danger">{{ error }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                {{ form.update(class="btn btn-primary") }}
+                                <a href="{{ url_for('user_attendance.attendance', user_id=current_user.id) }}"
+                                   class="btn btn-outline-primary">Attendance</a>
+                                <a href="{{ url_for('user_attendance.all_attendance_record', user_id=current_user.id) }}"
+                                   class="btn btn-outline-success">Attendance Record</a>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+{% endblock %}

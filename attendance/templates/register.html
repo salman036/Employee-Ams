@@ -1,0 +1,147 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+            </div>
+            <form class="login100-form validate-form" method="post" autocomplete="off">
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    <span class="login100-form-title">Create Company</span>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {% if form.company_name.errors %}
+                        {{ form.company_name(class='input100', placeholder="Company Name") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-building"></i></span>
+                        {% for error in form.company_name.errors %}
+                        <div class="alert-message block-message error">
+                            <span class="badge badge-danger">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ form.company_name(class='input100', placeholder="Company Name") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-building"></i></span>
+                        {% endif %}
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {% if form.email.errors %}
+                        {{ form.email(class='input100', placeholder="Email") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-envelope-open-text"></i></span>
+                        {% for error in form.email.errors %}
+                        <div class="alert-message block-message error">
+                            <span class="badge badge-danger">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ form.email(class='input100', placeholder="Email") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-envelope-open-text"></i></span>
+                        {% endif %}
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {% if form.confirm_email.errors %}
+                        {{ form.confirm_email(class='input100', placeholder="Confirm Email") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-envelope-open-text"></i></span>
+                        {% for error in form.confirm_email.errors %}
+                        <div class="alert-message block-message error">
+                            <span class="badge badge-danger">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ form.confirm_email(class='input100', placeholder="Confirm Email") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-envelope-open-text"></i></span>
+                        {% endif %}
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {% if form.full_name.errors %}
+                        {{ form.full_name(class='input100', placeholder="Full Name") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-user"></i></span>
+                        {% for error in form.full_name.errors %}
+                        <div class="alert-message block-message error">
+                            <span class="badge badge-danger">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ form.full_name(class='input100', placeholder="Full Name") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-user"></i></span>
+                        {% endif %}
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {% if form.user_name.errors %}
+                        {{ form.user_name(class='input100', placeholder="User Name") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-user"></i></span>
+                        {% for error in form.user_name.errors %}
+                        <div class="alert-message block-message error">
+                            <span class="badge badge-danger">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ form.user_name(class='input100', placeholder="User Name") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-user"></i></span>
+                        {% endif %}
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {% if form.password.errors %}
+                        {{ form.password(class='input100', placeholder="Password") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-lock"></i></span>
+                        {% for error in form.password.errors %}
+                        <div class="alert-message block-message error">
+                            <span class="badge badge-danger">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ form.password(class='input100', placeholder="Password") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-lock"></i></span>
+                        {% endif %}
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class='input100', placeholder="Confirm Password") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-lock"></i></span>
+                        {% for error in form.confirm_password.errors %}
+                        <div class="alert-message block-message error">
+                            <span class="badge badge-danger">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ form.confirm_password(class='input100', placeholder="Confirm Password") }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100"><i class="fas fa-lock"></i></span>
+                        {% endif %}
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        {{ form.submit(class="login100-form-btn") }}
+                    </div>
+
+                    <div class="text-center p-t-12">
+                        <span class="txt1">Have account</span>
+                        <a class="txt2" href="{{ url_for('company.login')}}">
+                            Login
+                        </a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

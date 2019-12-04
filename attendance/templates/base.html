@@ -1,0 +1,136 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="https://kit.fontawesome.com/a22e601bb9.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
+    {% if fav_icon %}
+        <link rel="icon" href="{{ fav_icon }}">
+    {% else %}
+        <link rel="icon" type="image/png"
+              href="{{ url_for('static', filename='RegisterLogin/images/icons/favicon.ico') }}"/>
+    {% endif %}
+
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='RegisterLogin/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='RegisterLogin/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='RegisterLogin/vendor/animate/animate.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='RegisterLogin/vendor/css-hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='RegisterLogin/vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='RegisterLogin/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!--admin css-->
+    <link href="{{ url_for('static', filename='admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+          type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{{ url_for('static', filename='admin/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{{ url_for('static', filename='admin/css/sb-admin.css') }}" rel="stylesheet">
+    <!-- STYLE CSS -->
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Employee Management System</title>
+    {% endif %}
+</head>
+
+
+{#<body style="background-image: url('static/images/pattern.jpg');">#}
+<body style="background-color: white">
+<div id="page-top">
+
+    {% include 'include/_ForNav.html' %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        <!--Categories: success (green), info (blue), warning (yellow), danger (red)-->
+        {% if messages %}
+            {% for category, message in messages %}
+                <div id="flashMessage" class="alert alert-{{ category }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+<!--===============================================================================================-->
+<script src="{{ url_for('static', filename='RegisterLogin/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================-->
+<script src="{{ url_for('static', filename='RegisterLogin/vendor/bootstrap/js/popper.js') }}"></script>
+<script src="{{ url_for('static', filename='RegisterLogin/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<!--===============================================================================================-->
+<script src="{{ url_for('static', filename='RegisterLogin/vendor/select2/select2.min.js') }}"></script>
+<!--===============================================================================================-->
+<script src="{{ url_for('static', filename='RegisterLogin/vendor/tilt/tilt.jquery.min.js') }}"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<!--admin JS-->
+
+<!-- Bootstrap core JavaScript-->
+<script src="{{ url_for('static', filename='admin/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{ url_for('static', filename='admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script src="{{ url_for('static', filename='admin/vendor/chart.js/Chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/vendor/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+
+
+<!-- Custom scripts for all pages-->
+
+<script src="{{ url_for('static', filename='admin/js/sb-admin.min.js') }}"></script>
+
+<!-- Demo scripts for this page-->
+<script src="{{ url_for('static', filename='admin/js/demo/datatables-demo.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/js/demo/chart-area-demo.js') }}"></script>
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#flashMessage').fadeOut('fast');
+    }, 2500); // <-- time in milliseconds
+</script>
+</body>

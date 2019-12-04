@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- DataTables Example -->
+
+    <div class="card-body">
+    {% if current_user.role == 'employee' %}
+        <h5><span style="color: blue">{{ current_user.full_name }}'s</span> Attendance record</h5>
+        {% else %}
+        <h5>Employees Attendance record</h5>
+    {% endif %}
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                {% if current_user.role == 'admin' %}
+                    <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>User Name</th>
+                        <th>Check in</th>
+                        <th>Check Out</th>
+                        <th>Total Time</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for record in attendance_record %}
+                        <tr>
+                            <td>{{ record.time.full_name }}</td>
+                            <td>{{ record.time.user_name }}</td>
+                            <td>{{ record.check_in.strftime("%I:%M %p") }}</td>
+                            {% if record.check_out == None %}
+                                <td><span style="color:red;">Missing</span></td>
+                            {% else %}
+                                <td>{{ record.check_out.strftime("%I:%M %p") }}</td>
+                            {% endif %}
+                            {% if record.check_out == None %}
+                                <td><span style="color: green">0:00:00</span></td>
+                            {% else %}
+                                <td>{{ record.check_out - record.check_in }}</td>
+                            {% endif %}
+                            <td>{{ record.date }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% else %}
+                    <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>User Name</th>
+                        <th>Check in</th>
+                        <th>Check Out</th>
+                        <th>Total Time</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for c_user in current_user_record %}
+                        <tr>
+                            <td>{{ c_user.time.full_name }}</td>
+                            <td>{{ c_user.time.user_name }}</td>
+                            <td>{{ c_user.check_in.strftime("%I:%M %p") }}</td>
+                            {% if c_user.check_out == None %}
+                                <td><span style="color: red">Missing</span></td>
+                            {% else %}
+                                <td>{{ c_user.check_out.strftime("%I:%M %p") }}</td>
+                            {% endif %}
+                            {% if  c_user.check_out == None %}
+                                <td><span style="color: green">0:00:00</span></td>
+                            {% else %}
+                                <td>{{ c_user.check_out - c_user.check_in }}</td>
+                            {% endif %}
+                            <td>{{ c_user.date }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
